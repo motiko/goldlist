@@ -8,6 +8,7 @@ import {
   ResponsiveContext
 } from "grommet";
 import { FormClose, Notification, Login } from "grommet-icons";
+import AppBody from "./AppBody";
 
 const AppBar = props => (
   <Box
@@ -31,7 +32,6 @@ class HomePage extends Component {
     const { showSidebar } = this.state;
     const { auth } = this.props;
     const authenticated = auth.isAuthenticated();
-    console.log(authenticated)
     return (
       <ResponsiveContext.Consumer>
         {size => (
@@ -40,7 +40,9 @@ class HomePage extends Component {
               <Heading level="3" margin="none">
                 goldList
               </Heading>
-                    <Button icon={<Login />} onClick={auth.login} />
+              {!authenticated && (
+                <Button icon={<Login />} onClick={auth.login} />
+              )}
               <Button
                 icon={<Notification />}
                 onClick={() =>
@@ -51,9 +53,7 @@ class HomePage extends Component {
               />{" "}
             </AppBar>
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-              <Box flex align="center" justify="center">
-                app body
-              </Box>
+              <AppBody/>
               {!showSidebar || size !== "small" ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
