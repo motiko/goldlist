@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import {
   Box,
   Button,
-  Collapsible,
   Heading,
-  Layer,
-  ResponsiveContext
 } from "grommet";
-import { FormClose, Notification, Login } from "grommet-icons";
+import { Menu, Login } from "grommet-icons";
 import AppBody from "./AppBody";
+import SideBar from "./SideBar";
 
 const AppBar = props => (
   <Box
@@ -24,77 +22,42 @@ const AppBar = props => (
   />
 );
 
+
 class HomePage extends Component {
   state = {
     showSidebar: false
   };
+
   render() {
     const { showSidebar } = this.state;
     const { auth } = this.props;
     const authenticated = auth.isAuthenticated();
     return (
-      <ResponsiveContext.Consumer>
-        {size => (
-          <Box fill>
-            <AppBar>
-              <Heading level="3" margin="none">
-                goldList
-              </Heading>
-              {!authenticated && (
-                <Button icon={<Login />} onClick={auth.login} />
-              )}
-              <Button
-                icon={<Notification />}
-                onClick={() =>
-                  this.setState(prevState => ({
-                    showSidebar: !prevState.showSidebar
-                  }))
-                }
-              />{" "}
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-              <AppBody/>
-              {!showSidebar || size !== "small" ? (
-                <Collapsible direction="horizontal" open={showSidebar}>
-                  <Box
-                    flex
-                    width="medium"
-                    background="light-2"
-                    elevation="small"
-                    align="center"
-                    justify="center"
-                  >
-                    sidebar
-                  </Box>
-                </Collapsible>
-              ) : (
-                <Layer>
-                  <Box
-                    background="light-2"
-                    tag="header"
-                    justify="end"
-                    align="center"
-                    direction="row"
-                  >
-                    <Button
-                      icon={<FormClose />}
-                      onClick={() => this.setState({ showSidebar: false })}
-                    />
-                  </Box>
-                  <Box
-                    fill
-                    background="light-2"
-                    align="center"
-                    justify="center"
-                  >
-                    sidebar
-                  </Box>
-                </Layer>
-              )}
-            </Box>
-          </Box>
-        )}
-      </ResponsiveContext.Consumer>
+      <Box fill>
+        <AppBar>
+          <Button
+            icon={<Menu />}
+            onClick={() =>
+              this.setState(prevState => ({
+                showSidebar: !prevState.showSidebar
+              }))
+            }
+          />{" "}
+          <Heading level="3" margin="none">
+            goldList
+          </Heading>
+          {!authenticated && <Button icon={<Login />} onClick={auth.login} />}
+        </AppBar>
+        <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+          {showSidebar && (
+            <SideBar
+              onClose={() => this.setState({ showSidebar: false })}
+              showSidebar={showSidebar}
+            />
+          )}
+          <AppBody />
+        </Box>
+      </Box>
     );
   }
 }
