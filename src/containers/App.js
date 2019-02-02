@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
-import Callback from "./Callback/Callback";
+import Callback from "../components/Callback";
 import HomePage from "./HomePage";
 import { Grommet } from "grommet";
 

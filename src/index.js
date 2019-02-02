@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import Auth from "./Auth/Auth";
-import App from "./App";
+import Auth from "./components/Auth";
+import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const auth = new Auth();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App auth={auth} />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App auth={auth} />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
