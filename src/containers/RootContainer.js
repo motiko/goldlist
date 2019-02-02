@@ -5,7 +5,7 @@ import {
   Heading,
 } from "grommet";
 import { Menu, Login } from "grommet-icons";
-import AppBody from "./AppBody";
+import List from "./List";
 import SideBar from "./SideBar";
 
 const AppBar = props => (
@@ -23,7 +23,7 @@ const AppBar = props => (
 );
 
 
-class HomePage extends Component {
+class RootContainer extends Component {
   state = {
     showSidebar: false
   };
@@ -55,11 +55,11 @@ class HomePage extends Component {
               showSidebar={showSidebar}
             />
           )}
-          <AppBody />
+          <List />
         </Box>
       </Box>
     );
   }
 }
 
-export default HomePage;
+export default RootContainer;

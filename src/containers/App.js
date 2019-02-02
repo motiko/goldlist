@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import Callback from "../components/Callback";
-import HomePage from "./HomePage";
+import RootContainer from "./RootContainer";
 import { Grommet } from "grommet";
 
 function App(props) {
@@ -29,7 +29,7 @@ function App(props) {
         exact
         path="/"
         render={() => (
-          <HomePage
+          <RootContainer
             auth={props.auth}
             history={props.history}
           />
