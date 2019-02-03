@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import produce from "immer";
 import { connect } from "react-redux";
-import { Box, FormField, TextInput, Heading } from "grommet";
+import { Box, FormField, Grid, TextInput, Heading } from "grommet";
 import { addCard } from "../ducks/list";
 
 const Card = ({ original, translation }) => {
@@ -51,15 +51,27 @@ class List extends Component {
       this.setState({ newCard: emptyCard });
     }
   };
+
   render() {
     const { cards } = this.props;
     const { newCard } = this.state;
     return (
-      <>
+      <Grid
+        fill={true}
+        rows={["3/4", "1/4"]}
+        columns={["full"]}
+        gap="medium"
+        areas={[
+          { name: "list", start: [0, 0], end: [0, 0] },
+          { name: "new", start: [0, 1], end: [0, 1] },
+        ]}
+      >
+        <Box gridArea="list" background="light-2" >
         {cards.map(card => (
           <Card {...card} />
         ))}
-        <Box fill flex align="center" justify="center">
+      </Box>
+        <Box gridArea="new" >
           <FormField>
             <TextInput
               placeholder="Original text"
@@ -79,7 +91,7 @@ class List extends Component {
             />
           </FormField>
         </Box>
-      </>
+      </Grid>
     );
   }
 }
