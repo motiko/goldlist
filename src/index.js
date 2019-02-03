@@ -7,6 +7,9 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
 const auth = new Auth();
 
 ReactDOM.render(

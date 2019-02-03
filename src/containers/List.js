@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import produce from "immer";
 import { connect } from "react-redux";
-import { Box, FormField, Grid, TextInput, Heading } from "grommet";
 import { addCard } from "../ducks/list";
+import { List, ListItem, Input } from "react-onsenui";
 
 const Card = ({ original, translation }) => {
   return (
-    <Box flex align="center" justify="center">
-      <Heading> {original}</Heading>
-      <Heading> {translation}</Heading>
-    </Box>
+    <ListItem expandable chevron>
+      <div className="left">{original}</div>
+      <div className="expandable-content">{translation}</div>
+    </ListItem>
   );
 };
 
@@ -18,7 +18,7 @@ const emptyCard = {
   translation: ""
 };
 
-class List extends Component {
+class CardsList extends Component {
   state = {
     newCard: emptyCard
   };
@@ -26,9 +26,6 @@ class List extends Component {
   translationRef = React.createRef();
   originalRef = React.createRef();
 
-  componentDidMount() {
-    this.originalRef.current.focus();
-  }
 
   onCardChange = property => ({ currentTarget }) => {
     this.setState(
@@ -36,12 +33,6 @@ class List extends Component {
         draft.newCard[property] = currentTarget.value;
       })
     );
-  };
-
-  onOriginalKeyUp = ({ keyCode }) => {
-    if (keyCode === 13) {
-      this.translationRef.current.focus();
-    }
   };
 
   onTranslationKeyUp = ({ keyCode }) => {
@@ -56,42 +47,24 @@ class List extends Component {
     const { cards } = this.props;
     const { newCard } = this.state;
     return (
-      <Grid
-        fill={true}
-        rows={["3/4", "1/4"]}
-        columns={["full"]}
-        gap="medium"
-        areas={[
-          { name: "list", start: [0, 0], end: [0, 0] },
-          { name: "new", start: [0, 1], end: [0, 1] },
-        ]}
-      >
-        <Box gridArea="list" background="light-2" >
-        {cards.map(card => (
-          <Card {...card} />
-        ))}
-      </Box>
-        <Box gridArea="new" >
-          <FormField>
-            <TextInput
-              placeholder="Original text"
-              value={newCard.original}
-              onInput={this.onCardChange("original")}
-              onKeyUp={this.onOriginalKeyUp}
-              ref={this.originalRef}
-            />
-          </FormField>
-          <FormField>
-            <TextInput
-              placeholder="Tranlsation"
-              value={newCard.translation}
-              onInput={this.onCardChange("translation")}
-              ref={this.translationRef}
-              onKeyUp={this.onTranslationKeyUp}
-            />
-          </FormField>
-        </Box>
-      </Grid>
+      <>
+        <List dataSource={cards} renderRows={card => <Card {...card} />} />
+        <Input
+          defaultValue={newCard.original}
+          float
+          onChange={this.onCardChange("original")}
+          modifier="material"
+          elementRef={this.originalRef}
+          placeholder="Original"
+        />
+        <Input
+          defaultValue={newCard.translation}
+          float
+          onChange={this.onCardChange("translation")}
+          modifier="material"
+          placeholder="Translation"
+        />
+      </>
     );
   }
 }
@@ -102,4 +75,4 @@ const mapDispatchToProps = { addCard };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
+)(CardsList);

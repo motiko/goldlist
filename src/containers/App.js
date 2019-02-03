@@ -3,23 +3,29 @@ import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import Callback from "../components/Callback";
 import RootContainer from "./RootContainer";
-import { Grommet } from "grommet";
+import { Page, Toolbar,BackButton, Icon, ToolbarButton  } from 'react-onsenui';
+
+const AppBar = props => (
+  <Toolbar>
+    <div className="left">
+      <BackButton>
+          Back
+      </BackButton>
+    </div>
+    <div className="center">
+      Gold List
+    </div>
+    <div className="right">
+      <ToolbarButton>
+        <Icon icon="md-menu" />
+      </ToolbarButton>
+    </div>
+  </Toolbar>
+);
 
 function App(props) {
-  const theme = {
-    global: {
-      colors: {
-        brand: "#228BE6"
-      },
-      font: {
-        family: "Roboto",
-        size: "14px",
-        height: "20px"
-      }
-    }
-  };
   return (
-    <Grommet theme={theme} full>
+    <Page renderToolbar={() => <AppBar/>}>
       <Route
         exact
         path="/callback"
@@ -35,7 +41,7 @@ function App(props) {
           />
         )}
       />
-    </Grommet>
+    </Page>
   );
 }
 
