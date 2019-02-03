@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import produce from "immer";
 import { connect } from "react-redux";
-import { Box, FormField, Grid, TextInput, Heading } from "grommet";
+import { Box, FormField, Grid, Heading } from "grommet";
+import { TextInput } from "react-native";
 import { addCard } from "../ducks/list";
 
 const Card = ({ original, translation }) => {
@@ -39,17 +40,13 @@ class List extends Component {
   };
 
   onOriginalKeyUp = ({ keyCode }) => {
-    if (keyCode === 13) {
-      this.translationRef.current.focus();
-    }
+    this.translationRef.current.focus();
   };
 
   onTranslationKeyUp = ({ keyCode }) => {
-    if (keyCode === 13) {
-      this.originalRef.current.focus();
-      this.props.addCard(this.state.newCard);
-      this.setState({ newCard: emptyCard });
-    }
+    this.originalRef.current.focus();
+    this.props.addCard(this.state.newCard);
+    this.setState({ newCard: emptyCard });
   };
 
   render() {
@@ -63,21 +60,21 @@ class List extends Component {
         gap="medium"
         areas={[
           { name: "list", start: [0, 0], end: [0, 0] },
-          { name: "new", start: [0, 1], end: [0, 1] },
+          { name: "new", start: [0, 1], end: [0, 1] }
         ]}
       >
-        <Box gridArea="list" background="light-2" >
-        {cards.map(card => (
-          <Card {...card} />
-        ))}
-      </Box>
-        <Box gridArea="new" >
+        <Box gridArea="list" background="light-2">
+          {cards.map(card => (
+            <Card {...card} />
+          ))}
+        </Box>
+        <Box gridArea="new">
           <FormField>
             <TextInput
               placeholder="Original text"
               value={newCard.original}
-              onInput={this.onCardChange("original")}
-              onKeyUp={this.onOriginalKeyUp}
+              onTextInput={this.onCardChange("original")}
+              onSubmitEditing={this.onOriginalKeyUp}
               ref={this.originalRef}
             />
           </FormField>
@@ -85,9 +82,9 @@ class List extends Component {
             <TextInput
               placeholder="Tranlsation"
               value={newCard.translation}
-              onInput={this.onCardChange("translation")}
+              onTextInput={this.onCardChange("translation")}
               ref={this.translationRef}
-              onKeyUp={this.onTranslationKeyUp}
+              onSubmitEditing={this.onTranslationKeyUp}
             />
           </FormField>
         </Box>
