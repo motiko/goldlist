@@ -11,7 +11,7 @@ export default function reducer(state = defaultList , action = {}) {
   return produce(state, draft => {
     switch (action.type) {
       case ADD_CARD:
-        draft.cards.push({})
+        draft.cards.push(action.newCard)
         return;
       case REMOVE_CARD:
         const { index } = action;
@@ -21,8 +21,8 @@ export default function reducer(state = defaultList , action = {}) {
   });
 }
 
-export function addCard() {
-  return { type: ADD_CARD };
+export function addCard(newCard) {
+  return { type: ADD_CARD, newCard };
 }
 
 export function removeCard(index) {

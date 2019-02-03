@@ -1,13 +1,13 @@
 {
   "name": "goldlist",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "auth0-js": "^9.9.1",
     "grommet": "^2.3.1",
     "grommet-icons": "^4.1.0",
     "immer": "^1.12.1",
-    "react": "^16.7.0",
+    "react": "^16.8.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
