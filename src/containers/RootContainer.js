@@ -5,7 +5,7 @@ import {
   Heading,
 } from "grommet";
 import { Menu, Login } from "grommet-icons";
-import List from "./List";
+import WordsList from "./WordsList";
 import SideBar from "./SideBar";
 
 const AppBar = props => (
@@ -55,7 +55,7 @@ class RootContainer extends Component {
               showSidebar={showSidebar}
             />
           )}
-          <List />
+          <WordsList />
         </Box>
       </Box>
     );
