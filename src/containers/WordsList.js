@@ -7,7 +7,7 @@ import { addCard } from "../ducks/list";
 const Card = ({ original, translation }) => {
   return (
     <List.Item>
-      {original}
+      {original} --
       {translation}
     </List.Item>
   );

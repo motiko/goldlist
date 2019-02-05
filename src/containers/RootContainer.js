@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import WordsList from "./WordsList";
 import { NavBar, Drawer, Icon, List } from "antd-mobile";
-import "./App.css";
+import "./RootContainer.css";
 
 class RootContainer extends Component {
   state = {
@@ -44,10 +44,8 @@ class RootContainer extends Component {
           open={showSidebar}
           onOpenChange={this.toggleShowSidebar}
         >
-          Click upper-left corner
+          <WordsList />
         </Drawer>
-
-        <WordsList />
       </>
     );
   }
