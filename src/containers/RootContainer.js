@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import WordsList from "./WordsList";
-import SideBar from "./SideBar";
 import { NavBar, Drawer, Icon, List } from "antd-mobile";
 import "./App.css";
 
