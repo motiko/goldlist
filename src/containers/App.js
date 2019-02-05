@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import Callback from "../components/Callback";
 import RootContainer from "./RootContainer";
-import { Grommet } from "grommet";
+import { NavBar, Drawer } from 'antd-mobile';
 
 function App(props) {
   const theme = {
@@ -19,7 +19,7 @@ function App(props) {
     }
   };
   return (
-    <Grommet theme={theme} full>
+    <>
       <Route
         exact
         path="/callback"
@@ -35,7 +35,7 @@ function App(props) {
           />
         )}
       />
-    </Grommet>
+    </>
   );
 }
 
