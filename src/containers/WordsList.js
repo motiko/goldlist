@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import produce from "immer";
 import { connect } from "react-redux";
-import { List, InputItem } from "antd-mobile";
+import { List, InputItem, WingBlank } from "antd-mobile";
 import { addCard } from "../ducks/list";
+import "./WordsList.css";
 
 const Card = ({ original, translation }) => {
   return (
@@ -56,7 +57,7 @@ class WordsList extends Component {
     const { cards } = this.props;
     const { newCard } = this.state;
     return (
-      <>
+      <div>
         <List>
           {cards.map(card => (
             <Card {...card} />
@@ -64,8 +65,8 @@ class WordsList extends Component {
         </List>
         <div
           className="fixed-bottom"
-          style={{ position: "fixed", bottom: "0" }}
         >
+          <WingBlank size="lg">
           <InputItem
             placeholder="Original text"
             value={newCard.original}
@@ -80,8 +81,9 @@ class WordsList extends Component {
             ref={this.translationRef}
             onKeyUp={this.onTranslationKeyUp}
           />
+        </WingBlank>
         </div>
-      </>
+      </div>
     );
   }
 }
