@@ -13,7 +13,6 @@ function App(props) {
         render={() => <Callback auth={props.auth} />}
       />
       <Route
-        exact
         path="/"
         render={() => (
           <RootContainer

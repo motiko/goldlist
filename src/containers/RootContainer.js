@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { Route } from "react-router-dom";
 import WordsList from "./WordsList";
 import { NavBar, Drawer, Icon, List } from "antd-mobile";
 import "./RootContainer.css";
@@ -17,8 +19,9 @@ class RootContainer extends Component {
     const authenticated = auth.isAuthenticated();
     const sidebar = (
       <List>
-        <List.Item>New List</List.Item>
+        <List.Item>New list</List.Item>
         <List.Item>Review</List.Item>
+        <List.Item>All lists</List.Item>
         <List.Item>Login</List.Item>
       </List>
     );
@@ -44,11 +47,11 @@ class RootContainer extends Component {
           open={showSidebar}
           onOpenChange={this.toggleShowSidebar}
         >
-          <WordsList />
+          <Route path="/newlist" component={WordsList}/>
         </Drawer>
       </>
     );
   }
 }
 
-export default RootContainer;
+export default withRouter(RootContainer);
