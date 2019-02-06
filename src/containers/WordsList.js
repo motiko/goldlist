@@ -63,26 +63,24 @@ class WordsList extends Component {
             <Card {...card} />
           ))}
         </List>
-        <div
-          className="fixed-bottom"
-        >
+        {cards.length < 25 && <div className="fixed-bottom">
           <WingBlank size="lg">
-          <InputItem
-            placeholder="Original text"
-            value={newCard.original}
-            onInput={this.onCardChange("original")}
-            onKeyUp={this.onOriginalKeyUp}
-            ref={this.originalRef}
-          />
-          <InputItem
-            placeholder="Tranlsation"
-            value={newCard.translation}
-            onInput={this.onCardChange("translation")}
-            ref={this.translationRef}
-            onKeyUp={this.onTranslationKeyUp}
-          />
-        </WingBlank>
-        </div>
+            <InputItem
+              placeholder="Original text"
+              value={newCard.original}
+              onInput={this.onCardChange("original")}
+              onKeyUp={this.onOriginalKeyUp}
+              ref={this.originalRef}
+            />
+            <InputItem
+              placeholder="Tranlsation"
+              value={newCard.translation}
+              onInput={this.onCardChange("translation")}
+              ref={this.translationRef}
+              onKeyUp={this.onTranslationKeyUp}
+            />
+          </WingBlank>
+        </div> }
       </div>
     );
   }
